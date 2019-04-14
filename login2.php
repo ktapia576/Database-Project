@@ -40,12 +40,13 @@
             
                     $result = $conn->query($sql) or die($conn->error);
             
+                    // If Successful login
                     if ($result->num_rows == 1) {
                         //Create Cookie
                         $cookie_name = "login";
                         $cookie_value = $login;
                         $ip = $_SERVER['REMOTE_ADDR'];  // Get ip address of client
-                        setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/");
+                        setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "./");
 
                         print("Your IP: ".$ip."<br>");
 
