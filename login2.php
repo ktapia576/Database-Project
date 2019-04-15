@@ -6,7 +6,7 @@
         <link href="styles.css" rel="stylesheet" type="text/css">
         <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 
-        <script defer src="logout.js"></script>
+        <script defer src="utility.js"></script>
     </head>
 
     <body>
@@ -106,7 +106,12 @@
                         $balance=$row['balance'];
                         printf("Total balance: %.2f",$balance);
 
-                        print('<button type="button" onclick="">Add Transaction</button><br>');
+                        // ------------------ 3 Functions (Add, Search, Update) ---------------------
+                        print('<button type="button" onclick="addTransaction()">Add Transaction</button><br>');
+                        print('<a href="updateTranscation.php">Display and update transaction</a><br>');
+                        print('<form method="POST" action="searchTransaction.php">
+                            Keyword:<input type="text" name="login"><br>
+                            <input type="submit"> </form><br>');
                     }
                     else {
                         // Check if login exists or if password does not match
