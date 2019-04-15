@@ -31,7 +31,7 @@
                     }
                     // Connect to the database
                     $conn = db_connect();
-        
+
                     if ($conn->connect_error) {
                         die("Connection failed: " . $conn->connect_error);
                     }
@@ -43,8 +43,9 @@
                     // If Successful login
                     if ($result->num_rows == 1) {
                         //Create Cookie
-                        $cookie_name = "login";
-                        $cookie_value = $login;
+                        $row = $result->fetch_assoc();  //fetch customer id
+                        $cookie_name = "customerID";
+                        $cookie_value = $row["id"];
                         $ip = $_SERVER['REMOTE_ADDR'];  // Get ip address of client
                         setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "./");
 
