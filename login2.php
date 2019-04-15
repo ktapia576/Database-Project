@@ -133,7 +133,7 @@
                 }
             }
             else {
-                die("<p>Error! Form not submitting through post method!</p>");
+                die("<p>You must use login form!</p>");
             }
         ?>
 
