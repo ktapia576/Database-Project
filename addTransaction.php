@@ -39,7 +39,6 @@
             else{
                 print("<p>You must log in to use this feature!</p>");
             }    
-        }
         ?>
 
     </body>
