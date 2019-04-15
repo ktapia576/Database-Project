@@ -43,12 +43,13 @@
                     // If Successful login
                     if ($result->num_rows == 1) {
                         // Fetch User info
-                        $name = $row["name"];
+                        $row = $result->fetch_assoc();  //fetch data from database
                         $id = $row["id"];
+                        $name = $row["name"];
                         $ip = $_SERVER['REMOTE_ADDR'];  // Get ip address of client
+                        $age = date_diff(date_create($row["DOB"]), date_create('now'))->y;
 
                         //Create Cookie
-                        $row = $result->fetch_assoc();  //fetch data from database
                         $cookie_name = "customerID";
                         $cookie_value = $id;
                         
@@ -64,9 +65,7 @@
                         }
                         else {
                             print("You are NOT from Kean University.<br>");
-                        }
-                        
-                        $age = date_diff(date_create($row["DOB"]), date_create('now'))->y;
+                        }               
 
                         print("Welcome Customer: ".$name."<br>");
                         print("Age: ".$age."<br>");
