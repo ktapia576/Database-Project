@@ -108,7 +108,7 @@
                         printf("Total balance: %.2f",$balance);
 
                         // ------------------ 3 Functions (Add, Search, Update) ---------------------
-                        print('<button type="button" onclick="addTransaction()">Add Transaction</button><br>');
+                        print('<button type="button" id="addTransaction">Add Transaction</button><br>');
                         print('<a href="updateTranscation.php">Display and update transaction</a><br>');
                         print('<form method="POST" action="searchTransaction.php">
                             Keyword:<input type="text" name="login"><br>
