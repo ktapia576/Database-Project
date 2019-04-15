@@ -1,23 +1,18 @@
+// Add Event Listener for Add Transaction Button
+$(document).ready(function() {
+    $("#addTransaction").click(function(){
+        if (cookieSet()){
+            $.post( "addTransaction.php" ); // request the php file but ignor return results
+        }
+        else{
+            alert("Cookie not set! You cannot use this function!");
+        }
+    }); 
+});
+
 function logout() {
     document.cookie = "customerID=; expires=Thu, 18 Dec 1970 12:00:00 UTC; path=./" // Set Cookie to expire
     window.location.href = "p2.html" // redirect user to p2.html
-}
-
-function addTransaction() {
-    if (cookieSet()){
-        $.ajax({
-            type: "POST",
-            url: './addTransaction.php',
-            data: {action:'add_transaction'},
-            success:function(html) {
-              alert(html);
-            }
- 
-       });
-    }
-    else{
-        alert("Cookie not set! You cannot use this function!");
-    }
 }
 
 function cookieSet(){
