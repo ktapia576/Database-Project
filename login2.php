@@ -7,6 +7,7 @@
                 border: 1px solid black;
             }
         </style>
+        <script src="logout.js"></script>
     </head>
 
     <body>
@@ -42,6 +43,8 @@
             
                     // If Successful login
                     if ($result->num_rows == 1) {
+                        print('<button type="button" onclick="logout()">Logout</button><br>');
+
                         // Fetch User info
                         $row = $result->fetch_assoc();  //fetch data from database
                         $id = $row["id"];
