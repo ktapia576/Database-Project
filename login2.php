@@ -2,11 +2,10 @@
 <html>
     <head>
         <title>CPS3740 Project</title>
-        <style>
-            table, th, td {
-                border: 1px solid black;
-            }
-        </style>
+
+        <link href="styles/style.css" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+
         <script defer src="logout.js"></script>
     </head>
 
@@ -106,6 +105,8 @@
                         
                         $balance=$row['balance'];
                         printf("Total balance: %.2f",$balance);
+
+                        print('<button type="button" onclick="">Add Transaction</button><br>');
                     }
                     else {
                         // Check if login exists or if password does not match
