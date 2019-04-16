@@ -102,7 +102,7 @@
                             echo"</table><br>";
                         }
                         else {
-                            print("<br>There are no records found.");
+                            print("There are no records found.<br>");
                         }
                         // -------------------------------------------------------------------------------
 
@@ -114,7 +114,7 @@
                         
                         $balance=$row['balance'];
                         if($balance === NULL){
-                            printf($name." current balance is NULL. May not have any transactional records");
+                            printf("<p>Total balance is NULL. May not have any transactional records</p>");
                         }
                         else {
                             printf("Total balance: %.2f",$balance);
