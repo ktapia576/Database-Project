@@ -77,38 +77,48 @@
                         print("__________________________________________________________________________________<br>");
 
                         // --------------------------------- Create table --------------------------------
-                        $sql = "SELECT mid, code, type, amount, mydatetime, note FROM CPS3740_2019S.Money_tapiake";
+                        $sql = "SELECT mid, code, type, amount, mydatetime, note FROM CPS3740_2019S.Money_tapiake WHERE cid='$id'";
 
                         // Get result or show error and die
                         $result = $conn->query($sql) or die($conn->error);
 
-                        echo"<br>The transactions for customer ".$name." are: Saving account";
-                        // Print Header columns of table
-                        echo "<table class='highlight' style='width: 50%;'><tr><th>ID</th><th>Code</th><th>Operation</th><th>Amount</th><th>Date Time</th><th>Note</th></tr>";
+                        if($result->num_rows > 0) {   // Check if there are records found
+                            echo"<br>The transactions for customer ".$name." are: Saving account";
+                            // Print Header columns of table
+                            echo "<table class='highlight' style='width: 50%;'><tr><th>ID</th><th>Code</th><th>Operation</th><th>Amount</th><th>Date Time</th><th>Note</th></tr>";
 
-                        // Print rows with data
-                        while($row = $result->fetch_assoc()) {
-                            if($row["type"] === 'D'){
-                                $type='<td>Deposit</td><td style="color: blue;">';
+                            // Print rows with data
+                            while($row = $result->fetch_assoc()) {
+                                if($row["type"] === 'D'){
+                                    $type='<td>Deposit</td><td style="color: blue;">';
+                                }
+                                else {
+                                    $type='<td>Withdraw</td><td style="color: red;">';
+                                }
+                                print("<tr><td>".$row["mid"]."</td><td>".$row["code"]."</td>".$type.
+                                $row["amount"]."</td><td>".$row["mydatetime"]."</td><td>".$row["note"]."</td></tr>"); 
                             }
-                            else {
-                                $type='<td>Withdraw</td><td style="color: red;">';
-                            }
-                            print("<tr><td>".$row["mid"]."</td><td>".$row["code"]."</td>".$type.
-                            $row["amount"]."</td><td>".$row["mydatetime"]."</td><td>".$row["note"]."</td></tr>"); 
+
+                            echo"</table><br>";
                         }
-
-                        echo"</table><br>";
+                        else {
+                            print("<br>There are no records found.");
+                        }
                         // -------------------------------------------------------------------------------
 
-                        $sql = "SELECT SUM(amount) as balance FROM CPS3740_2019S.Money_tapiake";
+                        $sql = "SELECT SUM(amount) as balance FROM CPS3740_2019S.Money_tapiake WHERE cid='$id'";
 
                         // Get result or show error and die
                         $result = $conn->query($sql) or die($conn->error);
                         $row = $result->fetch_assoc();
                         
                         $balance=$row['balance'];
-                        printf("Total balance: %.2f",$balance);
+                        if($balance === NULL){
+                            printf($name." current balance is NULL. May not have any transactional records");
+                        }
+                        else {
+                            printf("Total balance: %.2f",$balance);
+                        }
 
                         // ------------------ 3 Functions (Add, Search, Update) ---------------------
                         print('<p><button type="button" id="addTransaction">Add Transaction</button></p>');
