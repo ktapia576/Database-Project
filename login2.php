@@ -3,6 +3,7 @@
     <head>
         <title>CPS3740 Project</title>
 
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
         <link href="styles.css" rel="stylesheet" type="text/css">
         <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 
@@ -75,6 +76,7 @@
                         print("Address: ".$row["street"].", ".$row["city"].", ".$row["zipcode"]."<br>");
                         print("__________________________________________________________________________________<br>");
 
+                        // --------------------------------- Create table --------------------------------
                         $sql = "SELECT mid, code, type, amount, mydatetime, note FROM CPS3740_2019S.Money_tapiake";
 
                         // Get result or show error and die
@@ -82,7 +84,7 @@
 
                         echo"<br>The transactions for customer ".$name." are: Saving account";
                         // Print Header columns of table
-                        echo "<table><tr><th>ID</th><th>Code</th><th>Operation</th><th>Amount</th><th>Date Time</th><th>Note</th></tr>";
+                        echo "<table class='highlight' style='width: 50%;'><tr><th>ID</th><th>Code</th><th>Operation</th><th>Amount</th><th>Date Time</th><th>Note</th></tr>";
 
                         // Print rows with data
                         while($row = $result->fetch_assoc()) {
@@ -97,6 +99,7 @@
                         }
 
                         echo"</table><br>";
+                        // -------------------------------------------------------------------------------
 
                         $sql = "SELECT SUM(amount) as balance FROM CPS3740_2019S.Money_tapiake";
 
@@ -110,8 +113,8 @@
                         // ------------------ 3 Functions (Add, Search, Update) ---------------------
                         print('<p><button type="button" id="addTransaction">Add Transaction</button></p>');
                         print('<a href="updateTranscation.php">Display and update transaction</a><br>');
-                        print('<p><form method="POST" action="search.php">
-                            Keyword: <input type="text" name="keyword"> <input type="submit" value="Search Transaction"> </form></p>');
+                        print('<p><form method="GET" action="search.php">
+                            Keyword: <input type="text" name="keyword" style="width: 20%"> <input type="submit" value="Search Transaction"> </form></p>');
                     }
                     else {
                         // Check if login exists or if password does not match
