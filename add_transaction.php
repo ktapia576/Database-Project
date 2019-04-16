@@ -36,14 +36,13 @@
                 }
                 // --------------------------------------------------------------------
 
-                // Fetch User Info
-                $sql = "SELECT * FROM Customers WHERE id='$_COOKIE['customerID']'";
+                $id = $_COOKIE['customerID'];
+                $sql = "SELECT * FROM Customers WHERE id='$id'";    // Fetch User Info
             
                 $result = $conn->query($sql) or die($conn->error);
 
                 // Store User info
                 $row = $result->fetch_assoc();  //fetch data from database
-                $id = $row["id"];
                 $name = $row["name"];
                 
                 print('<button type="button" onclick="logout()">Logout</button><br>');  // logout button
@@ -57,9 +56,11 @@
                 
                 $balance=$row['balance'];
                 if($balance === NULL){
-                    printf($name." current balance is NULL");
+                    printf($name." current balance is NULL. May not have any transactional records");
                 }
-                printf($name." current balance is %.2f",$balance);
+                else {
+                    printf($name." current balance is %.2f",$balance);
+                }
 
             }
             else{
