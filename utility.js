@@ -2,7 +2,7 @@
 $(document).ready(function() {
     $("#addTransaction").click(function(){
         if (cookieSet()){
-            window.location.href = "addTransaction.php";
+            window.location.href = "add_transaction.php";
         }
         else{
             alert("Cookie not set! You cannot use this function!");
