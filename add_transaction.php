@@ -48,7 +48,7 @@
                 print('<p><button type="button" onclick="logout()">Logout</button></p>');  // logout button
                 print('<h2>Add Transaction</h2><br>');
                 
-                $sql = "SELECT SUM(amount) as balance FROM CPS3740_2019S.Money_tapiake WHERE cid='$id'";
+                $sql = "SELECT SUM(amount) as balance FROM CPS3740_2019S.Money_tapiake WHERE cid='$id'";    // Get balance of User based on ID
 
                 // Get result or show error and die
                 $result = $conn->query($sql) or die($conn->error);
