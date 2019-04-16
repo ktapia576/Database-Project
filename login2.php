@@ -43,7 +43,7 @@
             
                     // If Successful login
                     if ($result->num_rows == 1) {
-                        print('<button type="button" onclick="logout()">Logout</button><br>');  // logout button
+                        print('<p><button type="button" onclick="logout()">Logout</button></p>');  // logout button
 
                         // Fetch User info
                         $row = $result->fetch_assoc();  //fetch data from database
@@ -108,11 +108,10 @@
                         printf("Total balance: %.2f",$balance);
 
                         // ------------------ 3 Functions (Add, Search, Update) ---------------------
-                        print('<button type="button" id="addTransaction">Add Transaction</button><br>');
+                        print('<p><button type="button" id="addTransaction">Add Transaction</button></p>');
                         print('<a href="updateTranscation.php">Display and update transaction</a><br>');
-                        print('<form method="POST" action="searchTransaction.php">
-                            Keyword:<input type="text" name="login"><br>
-                            <input type="submit"> </form><br>');
+                        print('<p><form method="POST" action="search.php">
+                            Keyword: <input type="text" name="keyword"> <input type="submit" value="Search Transaction"> </form></p>');
                     }
                     else {
                         // Check if login exists or if password does not match

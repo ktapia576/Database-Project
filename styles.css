@@ -14,14 +14,19 @@ table, th, td {
 }
 
 button {
-    background-color: #375b8b;
-    color: white;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+    display: inline-block;
+    padding:0.2em 1.45em; 
+    margin:0.1em;
+    border:0.15em solid #CCCCCC;
+    box-sizing: border-box;
+    text-decoration:none;
+    font-weight:400;
+    color:#000000;
+    background-color:#CCCCCC;
+    text-align:center;
+    position:relative;
 }
 
 button:hover {
-    background-color: #3e8aee;
+    background-color: #7a7a7a;
 }
