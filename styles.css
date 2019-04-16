@@ -10,6 +10,10 @@ body {
     font-weight: lighter;
 }
 
+b {
+    font-weight: bold;
+}
+
 button {
     display: inline-block;
     padding:0.2em 1.45em; 

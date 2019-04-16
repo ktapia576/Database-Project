@@ -59,21 +59,21 @@
                         
                         setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "./");
 
-                        print("Your IP: ".$ip."<br>");
+                        print("<b>Your IP:</b> ".$ip."<br>");
 
                         // Check if IP is from Kean
                         $arr = explode('.', $ip);
 
                         if($arr[0] == 10 || ($arr[0] == 131 && $arr[1] == 125)){
-                            print("You ARE at Kean University.<br>");
+                            print("You <b>ARE</b> at Kean University.<br>");
                         }
                         else {
-                            print("You are NOT from Kean University.<br>");
+                            print("You are <b>NOT</b> from Kean University.<br>");
                         }               
 
-                        print("Welcome Customer: ".$name."<br>");
-                        print("Age: ".$age."<br>");
-                        print("Address: ".$row["street"].", ".$row["city"].", ".$row["zipcode"]."<br>");
+                        print("<b>Welcome Customer:</b> ".$name."<br>");
+                        print("<b>Age:</b> ".$age."<br>");
+                        print("<b>Address:</b> ".$row["street"].", ".$row["city"].", ".$row["zipcode"]."<br>");
                         print("__________________________________________________________________________________<br>");
 
                         // --------------------------------- Create table --------------------------------
@@ -114,10 +114,10 @@
                         
                         $balance=$row['balance'];
                         if($balance === NULL){
-                            printf("<p>Total balance is NULL. May not have any transactional records</p>");
+                            printf("<p>Total balance is <b>NULL</b>. May not have any transactional records</p>");
                         }
                         else {
-                            printf("Total balance: %.2f",$balance);
+                            printf("<b>Total balance:</b> %.2f",$balance);
                         }
 
                         // ------------------ 3 Functions (Add, Search, Update) ---------------------
