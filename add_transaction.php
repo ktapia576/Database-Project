@@ -13,6 +13,7 @@
     <body>
         <?php
             if(isset($_COOKIE['customerID'])){  // Check if User is logged in
+                // ------------------- Connect to Database ---------------------------
                 function db_connect() {
                     $conn;
                     
@@ -33,12 +34,14 @@
                 if ($conn->connect_error) {
                     die("Connection failed: " . $conn->connect_error);
                 }
+                // --------------------------------------------------------------------
 
+                // Fetch User Info
                 $sql = "SELECT * FROM Customers WHERE id='$_COOKIE['customerID']'";
             
                 $result = $conn->query($sql) or die($conn->error);
 
-                // Fetch User info
+                // Store User info
                 $row = $result->fetch_assoc();  //fetch data from database
                 $id = $row["id"];
                 $name = $row["name"];
@@ -53,7 +56,10 @@
                 $row = $result->fetch_assoc();
                 
                 $balance=$row['balance'];
-                printf("Total balance: %.2f",$balance);
+                if($balance === NULL){
+                    printf($name." current balance is NULL");
+                }
+                printf($name." current balance is %.2f",$balance);
 
             }
             else{
