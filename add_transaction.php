@@ -34,7 +34,27 @@
                     die("Connection failed: " . $conn->connect_error);
                 }
 
-                print("<p>You can you use this feature!</p>");
+                $sql = "SELECT * FROM Customers WHERE id='$_COOKIE['customerID']'";
+            
+                $result = $conn->query($sql) or die($conn->error);
+
+                // Fetch User info
+                $row = $result->fetch_assoc();  //fetch data from database
+                $id = $row["id"];
+                $name = $row["name"];
+                
+                print('<button type="button" onclick="logout()">Logout</button><br>');  // logout button
+                print('<h2>Add Transaction</h2><br>');
+                
+                $sql = "SELECT SUM(amount) as balance FROM CPS3740_2019S.Money_tapiake WHERE cid='$id'";
+
+                // Get result or show error and die
+                $result = $conn->query($sql) or die($conn->error);
+                $row = $result->fetch_assoc();
+                
+                $balance=$row['balance'];
+                printf("Total balance: %.2f",$balance);
+
             }
             else{
                 print("<p>You must log in to use this feature!</p>");
