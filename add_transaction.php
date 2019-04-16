@@ -45,7 +45,7 @@
                 $row = $result->fetch_assoc();  //fetch data from database
                 $name = $row["name"];
                 
-                print('<button type="button" onclick="logout()">Logout</button><br>');  // logout button
+                print('<p><button type="button" onclick="logout()">Logout</button></p>');  // logout button
                 print('<h2>Add Transaction</h2><br>');
                 
                 $sql = "SELECT SUM(amount) as balance FROM CPS3740_2019S.Money_tapiake WHERE cid='$id'";
