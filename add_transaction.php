@@ -3,6 +3,7 @@
     <head>
         <title>CPS3740 Project</title>
 
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
         <link href="styles.css" rel="stylesheet" type="text/css">
         <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 
@@ -46,7 +47,7 @@
                 $name = $row["name"];
                 
                 print('<p><button type="button" onclick="logout()">Logout</button></p>');  // logout button
-                print('<h2>Add Transaction</h2><br>');
+                print('<h3>Add Transaction</h3>');
                 
                 $sql = "SELECT SUM(amount) as balance FROM CPS3740_2019S.Money_tapiake WHERE cid='$id'";    // Get balance of User based on ID
 
@@ -56,12 +57,14 @@
                 
                 $balance=$row['balance'];
                 if($balance === NULL){
-                    printf($name." current balance is NULL. May not have any transactional records");
+                    printf("<b>".$name."</b> current balance is <b>NULL</b>. May not have any transactional records");
                 }
                 else {
-                    printf($name." current balance is %.2f",$balance);
+                    printf("<b>".$name."</b> current balance is <b>%.2f</b>.",$balance);
                 }
 
+                // ----------------------- Form for Add Transaction ---------------------------
+                print ("");
             }
             else{
                 print("<p>You must log in to use this feature!</p>");
