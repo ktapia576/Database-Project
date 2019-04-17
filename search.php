@@ -3,6 +3,7 @@
     <head>
         <title>CPS3740 Project</title>
 
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
         <link href="styles.css" rel="stylesheet" type="text/css">
         <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 
@@ -65,7 +66,15 @@
                     // Check if there are results from search
                     if($result->num_rows > 0) {
                         // Print Header columns of table
-                        echo "<table><tr><th>ID</th><th>Code</th><th>Operation</th><th>Amount</th><th>Date Time</th><th>Note</th></tr>";
+                        print("<table class='highlight' style='width: 50%;'><tr><th>ID</th><th>Code</th><th>Type</th><th>Amount</th>
+                        <th>Date Time</th><th>Note</th><th>Source</th></tr>");
+
+                        $sources= array(
+                            1 => "ATM",
+                            2 => "Online",
+                            3 => "Branch",
+                            4 => "Wired",
+                        );
 
                         // Print rows with data
                         while($row = $result->fetch_assoc()) {
@@ -76,7 +85,7 @@
                                 $type='<td>Withdraw</td><td style="color: red;">';
                             }
                             print("<tr><td>".$row["mid"]."</td><td>".$row["code"]."</td>".$type.
-                            $row["amount"]."</td><td>".$row["mydatetime"]."</td><td>".$row["note"]."</td></tr>"); 
+                            $row["amount"]."</td><td>".$row["mydatetime"]."</td><td>".$row["note"]."</td><td>".$sources[$row["sid"]]."</td></tr>"); 
                         }
 
                         echo"</table><br>";
