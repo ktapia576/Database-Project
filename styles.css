@@ -1,12 +1,17 @@
 html, body {
     margin: 0;
-    padding: 0;
+    padding-top: .5%;
+    padding-left: 1%;
     width: 100%;
   }
   
 body {
     font-family: 'Montserrat', sans-serif;
     font-weight: lighter;
+}
+
+b {
+    font-weight: bold;
 }
 
 button {
@@ -27,7 +32,7 @@ button:hover {
     background-color: #7a7a7a;
 }
 
-input[type=submit] {
+input[type='submit'] {
     display: inline-block;
     padding:0.2em 1.45em; 
     margin:0.1em;
@@ -41,6 +46,6 @@ input[type=submit] {
     position:relative;
 }
 
-input[type=submit]:hover {
+input[type='submit']:hover {
     background-color: #7a7a7a;
 }

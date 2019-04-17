@@ -3,6 +3,7 @@
     <head>
         <title>CPS3740 Project</title>
 
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
         <link href="styles.css" rel="stylesheet" type="text/css">
         <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 
@@ -49,31 +50,49 @@
                     
                     print('<p><button type="button" onclick="logout()">Logout</button></p>');  // logout button
                     print('<h2>Search</h2><br>');
-                    print('<p>The transactions in customer '.$name.' records matched keyword '.$keyword.' are: </p>');
+                    print('<p>The transactions in customer <b>'.$name.'</b> records matched keyword <b>'.$keyword.'</b> are: </p>');
                     
-                    // ------------------------- Create Table -----------------------------------------
-                    $sql = "SELECT mid, code, type, amount, mydatetime, note, sid FROM CPS3740_2019S.Money_tapiake WHERE cid='$id' AND note LIKE %$keyword%";
-
+                    // ------------------------- Search -----------------------------------------
+                    if($keyword === '*'){   // Check if user enters * for all transactions
+                        $sql = "SELECT mid, code, type, amount, mydatetime, note, sid FROM CPS3740_2019S.Money_tapiake WHERE cid='$id'";
+                    }
+                    else {
+                        $sql = "SELECT mid, code, type, amount, mydatetime, note, sid FROM CPS3740_2019S.Money_tapiake WHERE cid='$id' AND note LIKE '%$keyword%'";
+                    }
+                    
                     // Get result or show error and die
                     $result = $conn->query($sql) or die($conn->error);
 
-                    echo"<br>The transactions for customer ".$name." are: Saving account";
-                    // Print Header columns of table
-                    echo "<table><tr><th>ID</th><th>Code</th><th>Operation</th><th>Amount</th><th>Date Time</th><th>Note</th></tr>";
+                    // Check if there are results from search
+                    if($result->num_rows > 0) {
+                        // Print Header columns of table
+                        print("<table class='highlight' style='width: 50%;'><tr><th>ID</th><th>Code</th><th>Type</th><th>Amount</th>
+                        <th>Date Time</th><th>Note</th><th>Source</th></tr>");
 
-                    // Print rows with data
-                    while($row = $result->fetch_assoc()) {
-                        if($row["type"] === 'D'){
-                            $type='<td>Deposit</td><td style="color: blue;">';
+                        $sources= array(
+                            1 => "ATM",
+                            2 => "Online",
+                            3 => "Branch",
+                            4 => "Wired",
+                        );
+
+                        // Print rows with data
+                        while($row = $result->fetch_assoc()) {
+                            if($row["type"] === 'D'){
+                                $type='<td>Deposit</td><td style="color: blue;">';
+                            }
+                            else {
+                                $type='<td>Withdraw</td><td style="color: red;">';
+                            }
+                            print("<tr><td>".$row["mid"]."</td><td>".$row["code"]."</td>".$type.
+                            $row["amount"]."</td><td>".$row["mydatetime"]."</td><td>".$row["note"]."</td><td>".$sources[$row["sid"]]."</td></tr>"); 
                         }
-                        else {
-                            $type='<td>Withdraw</td><td style="color: red;">';
-                        }
-                        print("<tr><td>".$row["mid"]."</td><td>".$row["code"]."</td>".$type.
-                        $row["amount"]."</td><td>".$row["mydatetime"]."</td><td>".$row["note"]."</td></tr>"); 
+
+                        echo"</table><br>";
                     }
-
-                    echo"</table><br>";
+                    else {
+                        print("<p>No records found!</p>");
+                    }      
                     // -------------------------------------------------------------------------------
 
                     $sql = "SELECT SUM(amount) as balance FROM CPS3740_2019S.Money_tapiake WHERE cid='$id'";    // Get balance of User based on ID

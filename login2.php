@@ -59,56 +59,66 @@
                         
                         setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "./");
 
-                        print("Your IP: ".$ip."<br>");
+                        print("<b>Your IP:</b> ".$ip."<br>");
 
                         // Check if IP is from Kean
                         $arr = explode('.', $ip);
 
                         if($arr[0] == 10 || ($arr[0] == 131 && $arr[1] == 125)){
-                            print("You ARE at Kean University.<br>");
+                            print("You <b>ARE</b> at Kean University.<br>");
                         }
                         else {
-                            print("You are NOT from Kean University.<br>");
+                            print("You are <b>NOT</b> from Kean University.<br>");
                         }               
 
-                        print("Welcome Customer: ".$name."<br>");
-                        print("Age: ".$age."<br>");
-                        print("Address: ".$row["street"].", ".$row["city"].", ".$row["zipcode"]."<br>");
+                        print("<b>Welcome Customer:</b> ".$name."<br>");
+                        print("<b>Age:</b> ".$age."<br>");
+                        print("<b>Address:</b> ".$row["street"].", ".$row["city"].", ".$row["zipcode"]."<br>");
                         print("__________________________________________________________________________________<br>");
 
                         // --------------------------------- Create table --------------------------------
-                        $sql = "SELECT mid, code, type, amount, mydatetime, note FROM CPS3740_2019S.Money_tapiake";
+                        $sql = "SELECT mid, code, type, amount, mydatetime, note FROM CPS3740_2019S.Money_tapiake WHERE cid='$id'";
 
                         // Get result or show error and die
                         $result = $conn->query($sql) or die($conn->error);
 
-                        echo"<br>The transactions for customer ".$name." are: Saving account";
-                        // Print Header columns of table
-                        echo "<table class='highlight' style='width: 50%;'><tr><th>ID</th><th>Code</th><th>Operation</th><th>Amount</th><th>Date Time</th><th>Note</th></tr>";
+                        if($result->num_rows > 0) {   // Check if there are records found
+                            echo"<br>The transactions for customer ".$name." are: Saving account";
+                            // Print Header columns of table
+                            echo "<table class='highlight' style='width: 50%;'><tr><th>ID</th><th>Code</th><th>Operation</th><th>Amount</th><th>Date Time</th><th>Note</th></tr>";
 
-                        // Print rows with data
-                        while($row = $result->fetch_assoc()) {
-                            if($row["type"] === 'D'){
-                                $type='<td>Deposit</td><td style="color: blue;">';
+                            // Print rows with data
+                            while($row = $result->fetch_assoc()) {
+                                if($row["type"] === 'D'){
+                                    $type='<td>Deposit</td><td style="color: blue;">';
+                                }
+                                else {
+                                    $type='<td>Withdraw</td><td style="color: red;">';
+                                }
+                                print("<tr><td>".$row["mid"]."</td><td>".$row["code"]."</td>".$type.
+                                $row["amount"]."</td><td>".$row["mydatetime"]."</td><td>".$row["note"]."</td></tr>"); 
                             }
-                            else {
-                                $type='<td>Withdraw</td><td style="color: red;">';
-                            }
-                            print("<tr><td>".$row["mid"]."</td><td>".$row["code"]."</td>".$type.
-                            $row["amount"]."</td><td>".$row["mydatetime"]."</td><td>".$row["note"]."</td></tr>"); 
+
+                            echo"</table><br>";
                         }
-
-                        echo"</table><br>";
+                        else {
+                            print("There are no records found.<br>");
+                        }
                         // -------------------------------------------------------------------------------
 
-                        $sql = "SELECT SUM(amount) as balance FROM CPS3740_2019S.Money_tapiake";
+                        $sql = "SELECT SUM(amount) as balance FROM CPS3740_2019S.Money_tapiake WHERE cid='$id'";
 
                         // Get result or show error and die
                         $result = $conn->query($sql) or die($conn->error);
                         $row = $result->fetch_assoc();
                         
                         $balance=$row['balance'];
-                        printf("Total balance: %.2f",$balance);
+                        if($balance === NULL){
+                            printf("<p>Total balance is <b>NULL</b>. May not have any transactional records</p>");
+                        }
+                        else {
+                            printf("<b>Total balance:</b> %.2f",$balance);
+                        }
 
                         // ------------------ 3 Functions (Add, Search, Update) ---------------------
                         print('<p><button type="button" id="addTransaction">Add Transaction</button></p>');
