@@ -48,7 +48,8 @@
                     $row = $result->fetch_assoc();  //fetch data from database
                     $name = $row["name"];
                     
-                    print('<p><button type="button" onclick="logout()">Logout</button></p>');  // logout button
+                    // print('<p><button type="button" onclick="logout()">Logout</button></p>');  // logout button
+                    print ('<p><a href="javascript:logout()">Logout</a></p>'); // Logout Button 
                     print('<h2>Search</h2><br>');
                     print('<p>The transactions in customer <b>'.$name.'</b> records matched keyword <b>'.$keyword.'</b> are: </p>');
                     
