@@ -38,13 +38,7 @@
                 // --------------------------------------------------------------------
 
                 $id = $_COOKIE['customerID'];
-                $sql = "SELECT * FROM Customers WHERE id='$id'";    // Fetch User Info
-            
-                $result = $conn->query($sql) or die($conn->error);
-
-                // Store User info
-                $row = $result->fetch_assoc();  //fetch data from database
-                $name = $row["name"];
+                $name =$_POST['customerName'];
                 
                 // print('<p><button type="button" onclick="logout()">Logout</button></p>');  // logout button
                 print ('<p><a href="javascript:logout()">Logout</a></p>'); // Logout Button 

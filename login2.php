@@ -123,7 +123,7 @@
 
                         // ------------------ 3 Functions (Add, Search, Update) ---------------------
                         print('<p><form method="POST" action="add_transaction.php">
-                        <input type="hidden" name="customerName" value="$name">
+                        <input type="hidden" name="customerName" value="'.$name.'">
                         <input type="submit" value="Add Transaction"></form></p>');
                         print('<a href="updateTranscation.php">Display and update transaction</a><br>');
                         print('<p><form method="GET" action="search.php">
