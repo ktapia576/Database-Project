@@ -44,7 +44,8 @@
             
                     // If Successful login
                     if ($result->num_rows == 1) {
-                        print('<p><button type="button" onclick="logout()">Logout</button></p>');  // logout button
+                        // print('<p><button type="button" onclick="logout()">Logout</button></p>');  // logout button
+                        print ('<p><a href="javascript:logout()">Logout</a></p>'); // Logout Button 
 
                         // Fetch User info
                         $row = $result->fetch_assoc();  //fetch data from database
