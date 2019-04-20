@@ -91,7 +91,7 @@
                         echo"</table><br>";
                     }
                     else {
-                        print("<p>No records found!</p>");
+                        print("<p>No records found with the search keyword: <b>".$keyword."</b></p>");
                     }      
                     // -------------------------------------------------------------------------------
 

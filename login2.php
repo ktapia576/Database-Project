@@ -83,7 +83,7 @@
                         $result = $conn->query($sql) or die($conn->error);
 
                         if($result->num_rows > 0) {   // Check if there are records found
-                            echo"<br>The transactions for customer ".$name." are: Saving account";
+                            echo"<br>The transactions for customer ".$name." are:";
                             // Print Header columns of table
                             echo "<table class='highlight' style='width: 50%;'><tr><th>ID</th><th>Code</th><th>Operation</th><th>Amount</th><th>Date Time</th><th>Note</th></tr>";
 
