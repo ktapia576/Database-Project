@@ -122,7 +122,9 @@
                         }
 
                         // ------------------ 3 Functions (Add, Search, Update) ---------------------
-                        print('<p><button type="button" id="addTransaction">Add Transaction</button></p>');
+                        print('<p><form method="POST" action="add_transaction.php">
+                        <input type="hidden" name="customerName" value="$name">
+                        <input type="submit" value="Add Transaction"></form></p>');
                         print('<a href="updateTranscation.php">Display and update transaction</a><br>');
                         print('<p><form method="GET" action="search.php">
                             Keyword: <input type="text" name="keyword" style="width: 20%"> <input type="submit" value="Search Transaction"> </form></p>');
