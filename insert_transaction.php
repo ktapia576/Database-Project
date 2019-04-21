@@ -80,6 +80,16 @@
                 
                 $balance=$row['balance'];
 
+                // ------------ Check if duplicate code entry ---------------
+                $sql = "SELECT * FROM CPS3740_2019S.Money_tapiake WHERE code='$code'";
+
+                $result = $conn->query($sql) or die($conn->error);
+
+                if ($result->num_rows == 1) {
+                    die("There is a duplicate entry for the transaction code you have entered!");
+                }
+                // ----------------------------------------------------------
+
                 if($type == "W"){
                     if($amount <= $balance){  // Check balance before withdrawal  
                         $amount="-".$amount;
