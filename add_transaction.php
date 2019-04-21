@@ -3,7 +3,7 @@
     <head>
         <title>CPS3740 Project</title>
 
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+        
         <link href="styles.css" rel="stylesheet" type="text/css">
         <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 
@@ -59,7 +59,27 @@
                 }
 
                 // ----------------------- Form for Add Transaction ---------------------------
-                print ("");
+                print ("<form method='POST' action='insert_transaction.php'>
+                    Transaction Code: <input type='text' name='transaction-code' style='width: 20%;'><br>
+                    <input type='radio' name='transaction-type' value='deposit'> Deposit<br>
+                    <input type='radio' name='transaction-type' value='withdrawal'> Withdrawal<br>
+                    Amount: <input type='text' name='transaction-amount' style='width: 20%;'><br>
+                    Select a Source:  <select name='transaction-source'>");
+
+                        $sql = "SELECT * FROM CPS3740.Sources";
+
+                        // Get result or show error and die
+                        $result = $conn->query($sql) or die($conn->error);
+    
+                        // Print out options dynamically from Sources Table
+                        while($row=$result->fetch_assoc()){
+                            print("<option value='".$row["id"]."'>".$row["name"]."</option>");
+                        }
+
+                print(" </select><br>
+                    Note: <input type='text' name='transaction-note' style='width: 20%;'><br>
+                    <input type='submit' value='Submit'>
+                </form>");
             }
             else{
                 print("<p>You must log in to use this feature!</p>");
