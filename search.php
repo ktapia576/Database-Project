@@ -38,6 +38,22 @@
                     }
                     // --------------------------------------------------------------------
 
+                
+                    // -------------------- Get Sources from Sources Table -------------------------
+                    $sources= array();
+
+                    $sql = "SELECT * FROM CPS3740.Sources";
+
+                    // Get result or show error and die
+                    $result = $conn->query($sql) or die($conn->error);
+
+                    // Print out options dynamically from Sources Table
+                    while($row=$result->fetch_assoc()){
+                        $sources[$row["id"]]=$row["name"];
+                    }
+
+                    // ------------------------------------------------------------------------------
+
                     $id = $_COOKIE['customerID'];
                     $keyword = $_GET['keyword'];
                     $sql = "SELECT * FROM Customers WHERE id='$id'";    // Fetch User Info
@@ -69,13 +85,6 @@
                         // Print Header columns of table
                         print("<table class='highlight' style='width: 50%;'><tr><th>ID</th><th>Code</th><th>Type</th><th>Amount</th>
                         <th>Date Time</th><th>Note</th><th>Source</th></tr>");
-
-                        $sources= array(
-                            1 => "ATM",
-                            2 => "Online",
-                            3 => "Branch",
-                            4 => "Wired",
-                        );
 
                         // Print rows with data
                         while($row = $result->fetch_assoc()) {
