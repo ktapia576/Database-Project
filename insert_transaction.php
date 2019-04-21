@@ -102,7 +102,7 @@
                     // Get result or show error and die
                     $result = $conn->query($sql) or die($conn->error);
 
-                    print("<h1>Your Deposit of <b>".$amount."</b> was successful!");
+                    print("<p>Your Deposit of <b>".$amount."</b> was successful!</p>");
                 }
             }
             else {
