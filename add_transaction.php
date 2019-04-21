@@ -60,11 +60,12 @@
 
                 // ----------------------- Form for Add Transaction ---------------------------
                 print ("<form method='POST' action='insert_transaction.php'>
-                    Transaction Code: <input type='text' name='transaction-code' style='width: 20%;'><br>
-                    <input type='radio' name='transaction-type' value='deposit'> Deposit<br>
-                    <input type='radio' name='transaction-type' value='withdrawal'> Withdrawal<br>
+                    Transaction Code: <input type='text' name='transaction-code' style='width: 20%;' required><br>
+                    <input type='radio' name='transaction-type' value='D'> Deposit<br>
+                    <input type='radio' name='transaction-type' value='W'> Withdrawal<br>
                     Amount: <input type='text' name='transaction-amount' style='width: 20%;'><br>
-                    Select a Source:  <select name='transaction-source'>");
+                    Select a Source:  <select name='transaction-source'>
+                        <option disabled selected value> select an option </option>");
 
                         $sql = "SELECT * FROM CPS3740.Sources";
 
