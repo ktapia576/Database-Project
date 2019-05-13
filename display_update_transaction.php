@@ -67,7 +67,8 @@
 
                 if($result->num_rows > 0) {   // Check if there are records found
                     // Print Header columns of table
-                    echo "<table class='highlight' style='width: 50%;'><tr><th>ID</th><th>Code</th><th>Operation</th><th>Amount</th><th>Date Time</th><th>Note</th></tr>";
+                    echo "<form method='POST' action='insert_transaction.php'>";
+                    echo "<table class='highlight' style='width: 50%;'><tr><th>ID</th><th>Code</th><th>Operation</th><th>Amount</th><th>Date Time</th><th>Note</th><th>Delete</th></tr>";
 
                     // Print rows with data
                     while($row = $result->fetch_assoc()) {
@@ -78,10 +79,12 @@
                             $type='<td>Withdraw</td><td style="color: red;">';
                         }
                         print("<tr><td>".$row["mid"]."</td><td>".$row["code"]."</td>".$type.
-                        $row["amount"]."</td><td>".$row["mydatetime"]."</td><td style='background-color: yellow;'>".$row["note"]."</td></tr>"); 
+                        $row["amount"]."</td><td>".$row["mydatetime"]."</td><td style='background-color: yellow;'>".$row["note"]."</td>
+                        <td><input type="checkbox" name="transCode[]" value=".$row["code"]."></td></tr>"); 
                     }
 
                     echo"</table><br>";
+                    echo"<input type='submit' value='Submit'></form>";
                 }
                 else {
                     print("There are no records found.<br>");
