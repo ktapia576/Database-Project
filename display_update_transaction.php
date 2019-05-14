@@ -79,8 +79,10 @@
                             $type='<td>Withdraw</td><td style="color: red;">';
                         }
                         print("<tr><td>".$row["mid"]."</td><td>".$row["code"]."</td>".$type.
-                        $row["amount"]."</td><td>".$row["mydatetime"]."</td><td style='background-color: yellow;'>".$row["note"]."</td>
-                        <td><input type='checkbox' name='transCode[]' value='".$row["code"]."'></td></tr>"); 
+                        $row["amount"]."</td><td>".$row["mydatetime"]."</td>
+                        <td><input style='background-color: yellow;' type='text' name='note[]' value='".$row["note"]."'>
+                        <input type='hidden' name='codes[]' value='".$row["code"]."' /></td>
+                        <td><input type='checkbox' name='delete[]' value='".$row["code"]."'></td></tr>"); 
                     }
 
                     echo"</table><br>";
